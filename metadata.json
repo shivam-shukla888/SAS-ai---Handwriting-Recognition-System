@@ -1,0 +1,7 @@
+{
+  "name": "SAS ai: Advanced Handwriting Recognition",
+  "description": "A production-ready handwriting recognition platform featuring a CNN model architecture, multi-language support, real-time drawing canvas, and a comprehensive admin dashboard.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

@@ -1,0 +1,7 @@
+
+streamlit
+streamlit-drawable-canvas
+google-generativeai
+Pillow
+pandas
+plotly
