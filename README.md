@@ -1,6 +1,6 @@
 📖 Project Overview
 
-**SAS Ai** (Smart Attendance System AI / Script Analysis System AI) is a handwriting recognition platform designed to close the gap between physical writing and digital text. Leveraging the power of Large Multimodal Models (LMMs), specifically **Google Gemini 1.5 Flash**, it provides real-time, high-accuracy OCR (Optical Character Recognition) for handwritten notes, drawings, and documents.
+**SAS Ai**  is a handwriting recognition platform designed to close the gap between physical writing and digital text. Leveraging the power of Large Multimodal Models (LMMs), specifically **Google Gemini 1.5 Flash**, it provides real-time, high-accuracy OCR (Optical Character Recognition) for handwritten notes, drawings, and documents.
 
 The project features two implementations:
 1.  **Modern Web App (React/Vite)**: A full-featured, responsive dashboard with history tracking and advanced UI.
