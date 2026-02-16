@@ -40,40 +40,6 @@ The project features two implementations:
 -   **Framework**: Streamlit
 -   **Libraries**: Pandas, Plotly, Pillow, Streamlit-Drawable-Canvas
 
-## Getting Started
-
-### Prerequisites
--   **Node.js** (v18 or higher)
--   **Python** (3.8 or higher) - *Optional, for Streamlit version*
--   **Google Gemini API Key**: Get one from [Google AI Studio](https://aistudio.google.com/)
-
-### Optimization: React Web App (Recommended)
-
-1.  **Clone the repository**:
-    ```bash
-    git clone https://github.com/your-username/sas-ai-python.git
-    cd sas-ai-python
-    ```
-
-2.  **Install dependencies**:
-    ```bash
-    npm install
-    ```
-
-3.  **Environment Setup**:
-    Create a `.env.local` file in the root directory:
-    ```env
-    # Note: Ensure your code references this key correctly (VITE_API_KEY or process.env setup)
-    API_KEY=your_gemini_api_key_here
-    ```
-
-4.  **Run the application**:
-    ```bash
-    npm run dev
-    ```
-    Open `http://localhost:5173` in your browser.
-
-
 ## 🔒 Authentication (Default Credentials)
 
 For testing purposes, the default credentials are:
