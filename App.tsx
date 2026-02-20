@@ -53,7 +53,16 @@ const App: React.FC = () => {
 
         <Route path="/" element={user ? <Layout user={user} onLogout={handleLogout} /> : <Navigate to="/welcome" />}>
           <Route index element={<Dashboard onAddRecord={addRecord} />} />
-          <Route path="history" element={<History history={history} />} />
+          <Route
+            path="history"
+            element={
+              <History
+                history={history}
+                onDeleteRecord={(id: string) => setHistory((prev) => prev.filter((r) => r.id !== id))}
+                onClear={() => setHistory([])}
+              />
+            }
+          />
           <Route path="training" element={<ModelTraining />} />
           <Route path="settings" element={<Settings user={user} />} />
           {user?.role === 'ADMIN' && <Route path="admin" element={<AdminPanel />} />}

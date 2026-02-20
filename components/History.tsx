@@ -1,13 +1,15 @@
 
 import React from 'react';
 import { PredictionRecord } from '../types';
-import { Download, Search, Filter } from 'lucide-react';
+import { Download, Search, Filter, Trash } from 'lucide-react';
 
 interface HistoryProps {
   history: PredictionRecord[];
+  onDeleteRecord?: (id: string) => void;
+  onClear?: () => void;
 }
 
-const History: React.FC<HistoryProps> = ({ history }) => {
+const History: React.FC<HistoryProps> = ({ history, onDeleteRecord, onClear }) => {
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -24,6 +26,17 @@ const History: React.FC<HistoryProps> = ({ history }) => {
           </div>
           <button className="p-2 glass rounded-xl hover:bg-white/10 transition-all">
             <Filter size={20} />
+          </button>
+          <button
+            className="px-3 py-2 glass rounded-xl hover:bg-red-600/80 transition-all text-white text-sm"
+            onClick={() => {
+              if (!history || history.length === 0) return;
+              if (!window.confirm('Clear all history? This action cannot be undone.')) return;
+              if (typeof onClear === 'function') onClear();
+              try { localStorage.removeItem('sas_history'); } catch (e) {}
+            }}
+          >
+            Clear All
           </button>
         </div>
       </div>
@@ -69,9 +82,39 @@ const History: React.FC<HistoryProps> = ({ history }) => {
                   <td className="px-6 py-4 text-sm text-slate-400">
                     {new Date(record.timestamp).toLocaleString()}
                   </td>
-                  <td className="px-6 py-4">
-                    <button className="p-2 opacity-0 group-hover:opacity-100 hover:bg-indigo-600 rounded-lg transition-all text-white">
+                  <td className="px-6 py-4 flex items-center gap-2">
+                    <button
+                      className="p-2 opacity-0 group-hover:opacity-100 hover:bg-indigo-600 rounded-lg transition-all text-white"
+                      onClick={() => {
+                        // simple download of image
+                        const a = document.createElement('a');
+                        a.href = record.imageUrl;
+                        a.download = `prediction-${record.id}.png`;
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
+                      }}
+                    >
                       <Download size={16} />
+                    </button>
+
+                    <button
+                      className="p-2 opacity-0 group-hover:opacity-100 hover:bg-red-600 rounded-lg transition-all text-white"
+                      onClick={() => {
+                        if (!record?.id) return;
+                        if (!window.confirm('Delete this history record?')) return;
+                        if (typeof onDeleteRecord === 'function') onDeleteRecord(record.id);
+                        try {
+                          const raw = localStorage.getItem('sas_history');
+                          if (raw) {
+                            const arr: PredictionRecord[] = JSON.parse(raw);
+                            const next = arr.filter((r) => r.id !== record.id);
+                            localStorage.setItem('sas_history', JSON.stringify(next));
+                          }
+                        } catch (e) {}
+                      }}
+                    >
+                      <Trash size={16} />
                     </button>
                   </td>
                 </tr>
